@@ -5,8 +5,8 @@ def adicionarTarefas():
     tarefas.append(tarefa)
 
 def listarTarefas():
-    for i in (tarefas):
-        print(f'Tarefas: {i}')
+    for i, tarefa in enumerate(tarefas, start=1):
+        print(f'Tarefa {i}: {tarefa}')
 
 def sair():
     saida = (input('Aperte "Enter" para sair'))
@@ -30,5 +30,4 @@ while True:
             sair()
     elif usrAcao == 3:
         print('Finalizado')
-        break
-
+        break  
