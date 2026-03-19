@@ -1,4 +1,4 @@
-['Ir ao cinema']
-['Banho']
-['Banho', 'Comer']
-['Banho', 'Comer', 'Jogar']
+Beber água
+Jogar Minecraft
+Aprender Python
+Aprender Banco de Dados

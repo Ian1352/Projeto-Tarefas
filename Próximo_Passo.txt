@@ -1,0 +1,2 @@
+Numerar as tarefas no arquivo txt
+Apagar tarefas do arquivo txt "with open('Tarefas.txt', 'a') as f:" prestar atenção no "a", tem outras variações que podem ajudar nisso

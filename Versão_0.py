@@ -2,9 +2,9 @@ tarefas = []
 
 def adicionarTarefas():
     tarefa = input('Digite a tarefa: ')
-    tarefas.append(tarefa)
-    with open('Tarefas.txt', 'a') as f:
-        f.write(f"{tarefas}\n")
+    tarefas.append(tarefa) 
+    with open('Tarefas.txt', 'a') as f: # Fazer a numeração dos arquivos
+        f.write(f"{tarefa}\n")
 
 def listarTarefas():
     for i, tarefa in enumerate(tarefas, start=1):
