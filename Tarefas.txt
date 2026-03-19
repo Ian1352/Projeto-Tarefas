@@ -1,0 +1,4 @@
+['Ir ao cinema']
+['Banho']
+['Banho', 'Comer']
+['Banho', 'Comer', 'Jogar']

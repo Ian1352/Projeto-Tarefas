@@ -3,6 +3,8 @@ tarefas = []
 def adicionarTarefas():
     tarefa = input('Digite a tarefa: ')
     tarefas.append(tarefa)
+    with open('Tarefas.txt', 'a') as f:
+        f.write(f"{tarefas}\n")
 
 def listarTarefas():
     for i, tarefa in enumerate(tarefas, start=1):
