@@ -17,22 +17,35 @@ def listarTarefas():
 def concluirTarefa():
     listarTarefas()
     print('\n')
-    numero = int(input('Digite o ID da tarefa que deseja concluir: '))
-    tarefas[numero - 1]["Status"] = True
-    print('\n')
-    print('Tarefa Concluída')
 
+    try:
+        numero = int(input('Digite o ID da tarefa que deseja concluir: '))
+        if numero <= len(tarefas):
+            tarefas[numero - 1]["Status"] = True
+            print('\n')
+            print('Tarefa Concluída')
+        else:
+            print('\n***ID inválido! Tente novamente.***')
+    except ValueError:
+        print('ID inválido, amigo.')
+    
 def removerTarefa():
     listarTarefas()
     numero = int(input('Digite o ID da tarefa que deseja remover: '))
-    tarefas.pop(numero - 1)
-    print('\n')
+    if numero <= len(tarefas):
+        tarefas.pop(numero - 1)
+        print('\n')
+    else:
+        print('\n***ID iválido! Tente novamente.***')
 
 def editarTarefa():
     listarTarefas()
     numero = int(input('Digite o ID da tarefa que deseja editar: '))
-    edicao = str(input(f'Digite a alteração da tarefa {numero}'))
-    tarefas[numero - 1]["Titulo"] = edicao
+    if numero <= len(tarefas):
+        edicao = str(input(f'Digite a alteração da tarefa {numero}'))
+        tarefas[numero - 1]["Titulo"] = edicao
+    else:
+        print('\n***ID inválido! Tente novamente.***')
 
 def sair():
     saida = (input('Aperte "Enter" para sair'))
