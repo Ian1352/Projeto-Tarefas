@@ -1,4 +1,10 @@
-tarefas = []
+import json
+
+def mostrarTarefas():
+    with open("tarefas.json", "r") as f:
+        return json.load(f)
+
+tarefas = mostrarTarefas()
 
 def adicionarTarefas():
     tarefa = input('Digite a tarefa: ')
@@ -6,8 +12,11 @@ def adicionarTarefas():
         "id": len(tarefas) + 1,
         "Titulo": tarefa,
         "Status": False
-    }) 
-# json
+    })
+
+    with open("tarefas.json", "w") as f:
+        json.dump(tarefas, f, indent=2)
+
 
 def listarTarefas():
     '''
@@ -54,6 +63,7 @@ def editarTarefa():
 
 def sair():
     saida = (input('Aperte "Enter" para sair'))
+
 
 while True:
     usrAcao = int(input(('\n1 - Adicionar tarefa\n2 - Listar tarefa\n3 - Concluir Tarefas\n4 - Remover tarefa \n5 - Editar Tarefa \n6 - Sair\n\nDigite a opção de interesse: ')))
