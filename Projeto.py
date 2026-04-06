@@ -7,12 +7,16 @@ def adicionarTarefas():
         "Titulo": tarefa,
         "Status": False
     }) 
-    with open('Tarefas.txt', 'w') as f: # Fazer a numeração dos arquivos
-        f.write(f"{tarefa}\n")
+# json
 
 def listarTarefas():
-    for i, tarefa in enumerate(tarefas, start=1):
-        print(f'Tarefa {i}: {tarefa["id"]} {tarefa["Titulo"]} - {tarefa["Status"]}')
+    '''
+    Percorre todos os itens da lista "tarefas" marcando alternando de True e False
+    para "Concluído" e "Pendente"
+    '''
+    for tarefa in tarefas:
+        status_texto = 'Concluído' if tarefa["Status"] else 'Pendente'
+        print(f'ID: {tarefa["id"]} - {tarefa["Titulo"]} - {status_texto}')
 
 def concluirTarefa():
     listarTarefas()
@@ -20,6 +24,7 @@ def concluirTarefa():
 
     try:
         numero = int(input('Digite o ID da tarefa que deseja concluir: '))
+        #validação do ID
         if numero <= len(tarefas):
             tarefas[numero - 1]["Status"] = True
             print('\n')
@@ -51,7 +56,7 @@ def sair():
     saida = (input('Aperte "Enter" para sair'))
 
 while True:
-    usrAcao = int(input(('\n1 - Adicionar tarefa\n2 - Listar tarefa\n3 - Concluir Tarefas\n4 - Remover tarefa \n5 - Sair\n\nDigite a opção de interesse: ')))
+    usrAcao = int(input(('\n1 - Adicionar tarefa\n2 - Listar tarefa\n3 - Concluir Tarefas\n4 - Remover tarefa \n5 - Editar Tarefa \n6 - Sair\n\nDigite a opção de interesse: ')))
     if usrAcao == 1:
         qtdTarefas = int(input('Quantas tarefas deseja inserir? '))
         if qtdTarefas > 0:
@@ -71,8 +76,8 @@ while True:
         concluirTarefa()
     elif usrAcao == 4:
         removerTarefa()
-    elif usrAcao == 10:
-        editarTarefa()
     elif usrAcao == 5:
+        editarTarefa()
+    elif usrAcao == 6:
         print('Finalizado')
         break  
