@@ -17,15 +17,26 @@ def adicionarTarefas():
     with open("tarefas.json", "w") as f:
         json.dump(tarefas, f, indent=2)
 
+#def converterFalseTrue():
 
 def listarTarefas():
-    '''
-    Percorre todos os itens da lista "tarefas" marcando alternando de True e False
-    para "Concluído" e "Pendente"
-    '''
-    for tarefa in tarefas:
-        status_texto = 'Concluído' if tarefa["Status"] else 'Pendente'
-        print(f'ID: {tarefa["id"]} - {tarefa["Titulo"]} - {status_texto}')
+
+    print('Deseja filtrar as tarefas?')
+    tarefasfiltro = int(input('1 - Mostrar tudo \n2 - Mostrar pendentes \n3 - Mostrar concluídas \n\nOpção escolhida: '))
+    if(tarefasfiltro == 1):
+        for tarefa in tarefas:
+            status_texto = 'Concluído' if tarefa["Status"] else 'Pendente'      #Percorre todos os itens da lista "tarefas" marcando alternando de True e False para "Concluído" e "Pendente"
+            print(f'ID: {tarefa["id"]} - {tarefa["Titulo"]} - {status_texto}')
+    elif (tarefasfiltro == 2):
+        for tarefa in tarefas:
+            if(tarefa["Status"] == False):
+                status_texto = 'Pendente'
+                print(f'ID: {tarefa["id"]} - {tarefa["Titulo"]} - {status_texto}')
+    elif(tarefasfiltro == 3):
+        for tarefa in tarefas:
+            if(tarefa["Status"] == True):
+                status_texto = 'Concluído'
+                print(f'ID - {tarefa["id"]} - {tarefa["Titulo"]} - {status_texto}')
 
 def concluirTarefa():
     listarTarefas()
