@@ -20,7 +20,11 @@ def adicionarTarefas():
 #def converterFalseTrue():
 
 def listarTarefas():
+    for tarefa in tarefas:
+        texto_status = 'Concluúdo' if tarefa["Status"] else 'Pendente'
+        print(f'ID - {tarefa["id"]} - {tarefa["Titulo"]} - {texto_status}')
 
+def visualizarTarefas():
     print('Deseja filtrar as tarefas?')
     tarefasfiltro = int(input('1 - Mostrar tudo \n2 - Mostrar pendentes \n3 - Mostrar concluídas \n\nOpção escolhida: '))
     if(tarefasfiltro == 1):
@@ -38,27 +42,38 @@ def listarTarefas():
                 status_texto = 'Concluído'
                 print(f'ID - {tarefa["id"]} - {tarefa["Titulo"]} - {status_texto}')
 
+def salvarTarefa():
+    with open("tarefas.json", "w") as f:
+        json.dump(tarefas, f, indent= 2)
+
 def concluirTarefa():
     listarTarefas()
+    mostrarTarefas()
     print('\n')
 
     try:
-        numero = int(input('Digite o ID da tarefa que deseja concluir: '))
-        #validação do ID
-        if numero <= len(tarefas):
-            tarefas[numero - 1]["Status"] = True
+        opcao = int(input('Digite o ID da tarefa que deseja marcar como concluída: '))
+        if opcao <= len(tarefas):
+            tarefas[opcao - 1]["Status"] = True
+
+            salvarTarefa()
             print('\n')
             print('Tarefa Concluída')
+
         else:
             print('\n***ID inválido! Tente novamente.***')
     except ValueError:
         print('ID inválido, amigo.')
     
 def removerTarefa():
+    mostrarTarefas()
     listarTarefas()
     numero = int(input('Digite o ID da tarefa que deseja remover: '))
     if numero <= len(tarefas):
         tarefas.pop(numero - 1)
+
+        salvarTarefa()
+
         print('\n')
     else:
         print('\n***ID iválido! Tente novamente.***')
@@ -69,12 +84,14 @@ def editarTarefa():
     if numero <= len(tarefas):
         edicao = str(input(f'Digite a alteração da tarefa {numero}'))
         tarefas[numero - 1]["Titulo"] = edicao
+
+        salvarTarefa()
+
     else:
         print('\n***ID inválido! Tente novamente.***')
 
 def sair():
     saida = (input('Aperte "Enter" para sair'))
-
 
 while True:
     usrAcao = int(input(('\n1 - Adicionar tarefa\n2 - Listar tarefa\n3 - Concluir Tarefas\n4 - Remover tarefa \n5 - Editar Tarefa \n6 - Sair\n\nDigite a opção de interesse: ')))
@@ -90,7 +107,7 @@ while True:
             sair()
         else:
             print('')
-            listarTarefas()
+            visualizarTarefas()
             print('')
             sair()
     elif usrAcao == 3:
