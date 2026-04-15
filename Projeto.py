@@ -20,8 +20,6 @@ def adicionarTarefas():
     with open("tarefas.json", "w") as f:
         json.dump(tarefas, f, indent=2)
 
-#def converterFalseTrue():
-
 def listarTarefas():
     for tarefa in tarefas:
         texto_status = 'Concluúdo' if tarefa["Status"] else 'Pendente'
