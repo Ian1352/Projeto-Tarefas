@@ -1,8 +1,11 @@
 import json
 
 def mostrarTarefas():
-    with open("tarefas.json", "r") as f:
-        return json.load(f)
+    try:    
+        with open("tarefas.json", "r") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
 
 tarefas = mostrarTarefas()
 
@@ -68,15 +71,28 @@ def concluirTarefa():
 def removerTarefa():
     mostrarTarefas()
     listarTarefas()
-    numero = int(input('Digite o ID da tarefa que deseja remover: '))
-    if numero <= len(tarefas):
-        tarefas.pop(numero - 1)
+    numero = int(input('\nDigite o ID da tarefa que deseja remover (Digite 0 para remover tudo): '))
+    if numero == 0:
+        certeza = input('Tem certeza que deseja remover tudo? ***Não haverá como recuperar dados apagados*** \n\nDigite "SIM" para confirmar e "NAO" para cancelar: ')
 
-        salvarTarefa()
+        while certeza != 'SIM' and certeza != 'NAO':
+            certeza = input('Por favor, digite exatamente como é mostrado acima: ')
+        if certeza == 'SIM':
+            tarefas = []
+            salvarTarefa()
+            print("\nTodas as tarefas foram apagadas")
+        if certeza == 'NAO':
+            print('\nRetornando...')
 
-        print('\n')
     else:
-        print('\n***ID iválido! Tente novamente.***')
+        if numero <= len(tarefas):
+            tarefas.pop(numero - 1)
+            for i, tarefa in enumerate(tarefas):
+                tarefa["id"] = i + 1
+                salvarTarefa()
+                print('\n')
+            else:
+                print('\n***ID iválido! Tente novamente.***')
 
 def editarTarefa():
     listarTarefas()

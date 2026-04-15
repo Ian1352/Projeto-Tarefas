@@ -1,17 +1,1 @@
-[
-  {
-    "id": 2,
-    "Titulo": "Jogar",
-    "Status": false
-  },
-  {
-    "id": 3,
-    "Titulo": "Minecraft",
-    "Status": false
-  },
-  {
-    "id": 3,
-    "Titulo": "Celular",
-    "Status": false
-  }
-]
+[]
