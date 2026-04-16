@@ -1,3 +1,0 @@
-Problema de indice repetido!
-
-Não está apagando, concluindo ou editando de acordo com o indice	
