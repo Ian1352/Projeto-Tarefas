@@ -67,6 +67,7 @@ def concluirTarefa():
         print('ID inválido, amigo.')
     
 def removerTarefa():
+    global tarefas
     mostrarTarefas()
     listarTarefas()
     numero = int(input('\nDigite o ID da tarefa que deseja remover (Digite 0 para remover tudo): '))
@@ -81,16 +82,15 @@ def removerTarefa():
             print("\nTodas as tarefas foram apagadas")
         if certeza == 'NAO':
             print('\nRetornando...')
-
-    else:
-        if numero <= len(tarefas):
+    else: 
+        if numero <= len(tarefas) and numero > 0:
             tarefas.pop(numero - 1)
             for i, tarefa in enumerate(tarefas):
                 tarefa["id"] = i + 1
                 salvarTarefa()
-                print('\n')
-            else:
-                print('\n***ID iválido! Tente novamente.***')
+            print('Tarefa removida\n')
+        else:
+            print('\n***ID iválido! Tente novamente.***')
 
 def editarTarefa():
     listarTarefas()
@@ -108,28 +108,31 @@ def sair():
     saida = (input('Aperte "Enter" para sair'))
 
 while True:
-    usrAcao = int(input(('\n1 - Adicionar tarefa\n2 - Listar tarefa\n3 - Concluir Tarefas\n4 - Remover tarefa \n5 - Editar Tarefa \n6 - Sair\n\nDigite a opção de interesse: ')))
-    if usrAcao == 1:
-        qtdTarefas = int(input('Quantas tarefas deseja inserir? '))
-        if qtdTarefas > 0:
-            for i in range(qtdTarefas):
-                adicionarTarefas()
-    elif usrAcao == 2:
-        if tarefas == []:
-            print('')
-            print('Sem tarefas\n')
-            sair()
-        else:
-            print('')
-            visualizarTarefas()
-            print('')
-            sair()
-    elif usrAcao == 3:
-        concluirTarefa()
-    elif usrAcao == 4:
-        removerTarefa()
-    elif usrAcao == 5:
-        editarTarefa()
-    elif usrAcao == 6:
-        print('Finalizado')
-        break  
+    try:
+        usrAcao = int(input(('\n1 - Adicionar tarefa\n2 - Listar tarefa\n3 - Concluir Tarefas\n4 - Remover tarefa \n5 - Editar Tarefa \n6 - Sair\n\nDigite a opção de interesse: ')))
+        if usrAcao == 1:
+            qtdTarefas = int(input('Quantas tarefas deseja inserir? '))
+            if qtdTarefas > 0:
+                for i in range(qtdTarefas):
+                    adicionarTarefas()
+        elif usrAcao == 2:
+            if tarefas == []:
+                print('')
+                print('Sem tarefas\n')
+                sair()
+            else:
+                print('')
+                visualizarTarefas()
+                print('')
+                sair()
+        elif usrAcao == 3:
+            concluirTarefa()
+        elif usrAcao == 4:
+            removerTarefa()
+        elif usrAcao == 5:
+            editarTarefa()
+        elif usrAcao == 6:
+            print('Finalizado')
+            break  
+    except ValueError:
+        print('\n----Por favor, insira um valor válido----')
