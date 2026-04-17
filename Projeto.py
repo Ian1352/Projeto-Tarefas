@@ -62,19 +62,27 @@ def concluirTarefa():
     mostrarTarefas()
     print('\n')
 
-    try:
-        opcao = int(input('Digite o ID da tarefa que deseja marcar como concluída: '))
-        if opcao <= len(tarefas):
-            tarefas[opcao - 1]["Status"] = True
+    encontrou = False
+    global tarefas
 
-            salvarTarefa()
-            print('\n')
-            print('Tarefa Concluída')
-
-        else:
-            print('\n***ID inválido! Tente novamente.***')
-    except ValueError:
-        print('ID inválido, tente novamente.')
+    for tarefa in tarefas:
+        if tarefa["Status"] == False:
+            encontrou = True
+    if encontrou == True:
+        while True:
+            try:
+                opcao = int(input('Digite o ID da tarefa que deseja marcar como concluída: '))
+                if opcao <= len(tarefas):
+                    tarefas[opcao - 1]["Status"] = True
+                    salvarTarefa()
+                    print('\n')
+                    print('Tarefa Concluída')
+                else:
+                    print('\n***ID inválido! Tente novamente.***')
+            except ValueError:
+                print('ID inválido, tente novamente.')
+    else:
+        print('Todas as tarefas já foram concluiídas')
     
 def removerTarefa():
     global tarefas
@@ -124,6 +132,8 @@ while True:
             break
         except ValueError:
             print('\n----Por favor, insira um valor válido----')
+            continue
+        
     if usrAcao == 1:
         while True:
             try:
